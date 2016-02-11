@@ -31,8 +31,14 @@ done
 
 shift $(( $OPTIND - 1 ))
 
-if [ $COORDS ]; then
-  checkmontitor $1 $2
+if [ -z $1 ]; then
+  WINDOW=$(pfw)
 else
-  checkmonitor $(wattr xy $1)
+  WINDOW=$1
+fi
+
+if [ $COORDS ]; then
+  checkmonitor $1 $2
+else
+  checkmonitor $(wattr xy $WINDOW)
 fi
