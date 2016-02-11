@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# lsd - list the current displays
+# (c) arcetera 2016
+#
+
+MONITORS="$(xrandr | grep -e "^.* connected" | cut -d" " --field "1")"
+for MONITOR in $MONITORS; do
+  echo "$MONITOR"
+done
