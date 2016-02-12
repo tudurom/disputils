@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # pfd - print focused display
-# (c) arcetera 2016
+# (c) ix 2016
 #
 
 usage() {
