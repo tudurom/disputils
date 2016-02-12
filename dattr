@@ -5,7 +5,7 @@
 #
 
 usage() {
-  echo "usage: $(basename $0) [-a] <display>"
+  echo "usage: $(basename $0) [-axywh] <display>"
   exit ${1:-0}
 }
 
@@ -25,9 +25,22 @@ toabsolute() {
   echo $W $H $3 $4
 }
 
-while getopts a opt; do
+echoarg() {
+  case $ARG in
+    x) echo $1 ;;
+    y) echo $2 ;;
+    w) echo $3 ;;
+    h) echo $4 ;;
+  esac
+}
+
+while getopts axywh opt; do
   case $opt in
     a) ABSOLUTE=1 ;;
+    x) ARG='x' ;;
+    y) ARG='y' ;;
+    w) ARG='w' ;;
+    h) ARG='h' ;;
   esac
 done
 
@@ -48,4 +61,8 @@ else
   GEOM=$XRANDR_GEO
 fi
 
-echo $(towmutils $GEOM)
+if [ $ARG ]; then
+  echoarg $(towmutils $GEOM)
+else
+  echo $(towmutils $GEOM)
+fi
