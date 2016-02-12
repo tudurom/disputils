@@ -19,9 +19,11 @@ WW=$(wattr w $WID)
 WH=$(wattr h $WID)
 BW=$(wattr b $WID)
 
-# get monitor w/h
+# get monitor xywh
 SW=$(dattr -w $MON)
 SH=$(dattr -h $MON)
+SX=$(dattr -x $MON)
+SY=$(dattr -y $MON)
 
 # move the window to the center
 wtp $((SW/2 + SX - WW/2 - BW)) $((SH/2 - SY - WH/2 - BW)) $WW $WH $WID
