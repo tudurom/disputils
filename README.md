@@ -9,7 +9,9 @@ Here's a simple example.
 The following script puts the current focused window in the middle of the
 current monitor rather than at the center of the root window.
 
-```sh
+Example
+-------
+  
 #!/bin/sh
 
 # get display, wid, w/h, border width
@@ -27,7 +29,6 @@ SY=$(dattr -y $MON)
 
 # move the window to the center
 wtp $((SW/2 + SX - WW/2 - BW)) $((SH/2 - SY - WH/2 - BW)) $WW $WH $WID
-```
 
 Dependencies
 ------------
@@ -38,7 +39,6 @@ Dependencies
 Credit
 ------
 
-These scripts are based off @laserswald's 'backflip', available
-[here](https://github.com/laserswald/backflip).
+These scripts are based off @laserswald's 'backflip'.
 
 Especially thanks to z3bra and dcat for work on wmutils itself.
