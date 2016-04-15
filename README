@@ -1,3 +1,9 @@
+NOTE
+----
+
+These are unfinished as I am doing a total rewrite. The old version is available here.
+https://arcetera.moe/dl/rel/disputils-0.1.tar.gz
+
 disputils
 =========
 
@@ -11,7 +17,7 @@ current monitor rather than at the center of the root window.
 
 Example
 -------
-  
+
 #!/bin/sh
 
 # get display, wid, w/h, border width
@@ -34,11 +40,3 @@ Dependencies
 ------------
 
 * xrandr
-* wmutils/core
-
-Credit
-------
-
-These scripts are based off @laserswald's 'backflip'.
-
-Especially thanks to z3bra and dcat for work on wmutils itself.

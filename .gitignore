@@ -1,0 +1,5 @@
+*.c
+*.o
+lsd
+pfd
+dattr
