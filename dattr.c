@@ -1,3 +1,6 @@
+/* disputils dattr.c 04/15/2016 tudurom <unknown>
+ * ix <arcetera@openmailbox.org>
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,7 +21,7 @@ usage(char *name)
 
 void
 print_output(xcb_connection_t* conn, xcb_randr_output_t output)
-{
+{ /* print the actual output */
     uint8_t* name = get_output_name(conn, output);
     if (get_output_connection(conn, output) == 0) {
         printf("%s\n", name);
