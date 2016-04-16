@@ -1,8 +1,3 @@
-/* disputils util.h 04/15/2016 ???
- * tudurom <unknown>
- * ix <arcetera@openmailbox.org>
- */
-
 #ifndef UTIL_H__
 #define UTIL_H__
 
@@ -17,3 +12,4 @@ int mapped(xcb_connection_t *, xcb_window_t);
 int ignore(xcb_connection_t *, xcb_window_t);
 
 #endif
+

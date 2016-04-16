@@ -1,5 +1,5 @@
-/* disputils randr.c 04/15/2016 tudurom <unknown>
- * ix <arcetera@openmailbox.org>
+/* disputils randr.c 04/15/2016 tudurom <xenogenesis@openmailbox.org
+ * ix <arcetera@openmailbox.org
  */
 
 #include "randr.h"
@@ -37,10 +37,9 @@ get_outputs(xcb_connection_t* conn, xcb_randr_provider_t provider, xcb_randr_out
 
 xcb_randr_get_output_info_reply_t *
 get_output_info(xcb_connection_t* conn, xcb_randr_output_t output)
-{
+{ /* get info about the output like crtc, modes etc */
     xcb_randr_get_output_info_cookie_t oic;
 
-    /* TODO: Figure out the use of the timestamp below. */
     oic = xcb_randr_get_output_info(conn, output, 0);
     xcb_randr_get_output_info_reply_t *output_info_reply;
 
@@ -52,15 +51,61 @@ get_output_info(xcb_connection_t* conn, xcb_randr_output_t output)
 }
 
 uint8_t* get_output_name(xcb_connection_t* conn, xcb_randr_output_t output)
-{
+{ /* get output's name, like LVDS-1 */
     xcb_randr_get_output_info_reply_t* r;
     r = get_output_info(conn, output);
     return xcb_randr_get_output_info_name(r);
 }
 
-int get_output_connection(xcb_connection_t* conn, xcb_randr_output_t output){
+int get_output_connection(xcb_connection_t* conn, xcb_randr_output_t output)
+{ /* returns 0 if the output is connected */
     xcb_randr_get_output_info_reply_t* r;
     r = get_output_info(conn, output);
     return r->connection;
+}
+
+xcb_randr_get_crtc_info_reply_t *
+get_output_crtc_info(xcb_connection_t* conn, xcb_randr_crtc_t crtc)
+{ /* get crtc info (width, height, x, y, ...) */
+    xcb_randr_get_crtc_info_cookie_t cic;
+
+    cic = xcb_randr_get_crtc_info(conn, crtc, 0);
+
+    xcb_randr_get_crtc_info_reply_t *crtc_info_reply;
+    crtc_info_reply = xcb_randr_get_crtc_info_reply(conn, cic, NULL);
+    if (!crtc_info_reply)
+        errx(1, "Output not in use");
+
+    return crtc_info_reply;
+}
+
+xcb_window_t
+get_focused_window(xcb_connection_t *conn)
+{ /* returns the id of the focused window */
+    xcb_window_t win = 0;
+    xcb_get_input_focus_cookie_t input_focus_cookie;
+    xcb_get_input_focus_reply_t *input_focus_reply;
+
+    input_focus_cookie = xcb_get_input_focus(conn);
+    input_focus_reply = xcb_get_input_focus_reply(conn, input_focus_cookie, NULL);
+    if (!input_focus_reply)
+        errx(1, "Cannot get focused window.");
+    win = input_focus_reply->focus;
+    free(input_focus_reply);
+    return win;
+}
+
+xcb_get_geometry_reply_t*
+get_window_geometry(xcb_connection_t *conn, xcb_window_t window)
+{ /* returns the geometry of a window (width, height, x, y) */
+    xcb_get_geometry_cookie_t get_geometry_cookie;
+    xcb_get_geometry_reply_t *get_geometry_reply;
+
+    get_geometry_cookie = xcb_get_geometry(conn, window);
+    get_geometry_reply = xcb_get_geometry_reply(conn, get_geometry_cookie, NULL);
+
+    if (!get_geometry_reply)
+        errx(1, "0x%08x: no such window", window);
+    return get_geometry_reply;
 }
 
