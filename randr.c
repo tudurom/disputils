@@ -2,6 +2,9 @@
  * ix <arcetera@openmailbox.org
  */
 
+#include <xcb/randr.h>
+
+#include "util.h"
 #include "randr.h"
 
 int
@@ -109,3 +112,19 @@ get_window_geometry(xcb_connection_t *conn, xcb_window_t window)
     return get_geometry_reply;
 }
 
+xcb_randr_get_output_primary_reply_t*
+get_primary_output(xcb_connection_t *conn)
+{ /* returns the primary output (display) */
+    xcb_screen_t *scrn;
+    xcb_window_t root;
+    xcb_randr_get_output_primary_cookie_t c;
+    xcb_randr_get_output_primary_reply_t *primary_output;
+
+    get_screen(conn, &scrn);
+    root = scrn->root;
+
+    c = xcb_randr_get_output_primary(conn, root);
+    primary_output = xcb_randr_get_output_primary_reply(conn, c, NULL);
+
+    return primary_output;
+}

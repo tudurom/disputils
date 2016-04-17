@@ -27,8 +27,13 @@ int get_output_connection(xcb_connection_t* conn, xcb_randr_output_t output);
 /* Return an output's crtc info */
 xcb_randr_get_crtc_info_reply_t * get_output_crtc_info(xcb_connection_t* conn, xcb_randr_crtc_t crtc);
 
+/* Return the id of the currently focused window */
 xcb_window_t get_focused_window(xcb_connection_t *conn);
 
+/* Return a window's geometry (width, height, x, y) */
 xcb_get_geometry_reply_t* get_window_geometry(xcb_connection_t *conn, xcb_window_t window);
+
+/* Return the primary output (display) */
+xcb_randr_get_output_primary_reply_t* get_primary_output(xcb_connection_t *conn);
 
 #endif /* end of include guard: WMUTILS_RANDR */
