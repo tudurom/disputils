@@ -1,3 +1,7 @@
+/* disputils randr.c 04/15/2016 tudurom <xenogenesis@openmailbox.org>
+ * ix <arcetera@openmailbox.org
+ */
+
 #include <err.h>
 #include <stdlib.h>
 #include <xcb/xcb.h>

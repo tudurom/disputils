@@ -1,3 +1,7 @@
+/* disputils randr.c 04/15/2016 tudurom <xenogenesis@openmailbox.org>
+ * ix <arcetera@openmailbox.org
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,7 +38,7 @@ main(int argc, char *argv[])
     xcb_randr_provider_t* providers;
     int p_len = get_providers(conn, scrn, &providers);
 
-    // get the id of the output
+    /* get the id of the output */
     int i = 0;
     while (i < p_len && output == -1) {
         xcb_randr_output_t *os;
@@ -56,13 +60,13 @@ main(int argc, char *argv[])
     }
     output_info = get_output_info(conn, output);
 
-    // get info about output
+    /* get info about output */
     screen_crtc = output_info->crtc;
     screen_crtc_info = get_output_crtc_info(conn, screen_crtc);
     if (!screen_crtc_info)
         errx(1, "Output not in use");
 
-    // print info
+    /* print info */
     for (int i = 0; i < strlen(argv[1]); i++) {
         switch (argv[1][i]) {
             case 'w':
@@ -78,7 +82,7 @@ main(int argc, char *argv[])
                 printf("%d", screen_crtc_info->y);
                 break;
         }
-        // print a space if more attributes come after
+        /* print a space if more attributes come after */
         putc(i + 1 < strlen(argv[1]) ? ' ' : '\n', stdout);
     }
     free(output_info);

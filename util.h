@@ -1,3 +1,7 @@
+/* disputils randr.c 04/15/2016 tudurom <xenogenesis@openmailbox.org>
+ * ix <arcetera@openmailbox.org
+ */
+
 #ifndef UTIL_H__
 #define UTIL_H__
 

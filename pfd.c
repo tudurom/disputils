@@ -1,3 +1,7 @@
+/* disputils randr.c 04/15/2016 tudurom <xenogenesis@openmailbox.org>
+ * ix <arcetera@openmailbox.org
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <err.h>
@@ -38,13 +42,13 @@ main(int argc, char *argv[])
     init_xcb(&conn);
     get_screen(conn, &scrn);
 
-    // Get info about the focused window
+    /* Get info about the focused window */
     f_window = get_focused_window(conn);
     window_geometry = get_window_geometry(conn, f_window);
     window_x = window_geometry->x;
     window_y = window_geometry->y;
 
-    // Iterate through outputs
+    /* Iterate through outputs */
     xcb_randr_provider_t* providers;
     int p_len = get_providers(conn, scrn, &providers);
 
@@ -57,7 +61,7 @@ main(int argc, char *argv[])
         while (j < o_len && !output_name) {
             output = os[j];
             if (get_output_connection(conn, output) == 0) {
-                // Check
+                /* Check */
                 output_info = get_output_info(conn, output);
                 output_crtc_info = get_output_crtc_info(conn, output_info->crtc);
 
