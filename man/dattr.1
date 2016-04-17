@@ -7,7 +7,7 @@
 .Nd get display attributes
 .Sh SYNOPSIS
 .Nm dattr
-.Op Cm whxy
+.Op Cm -whxy
 .Ar display_id
 .Sh DESCRIPTION
 .Nm
@@ -21,21 +21,21 @@ What information is presented depends on the commands given to
 The queried arguments are printed in the order they are requested,
 spearated by a space.
 .Bl -tag -display_idth Ds
-.It Cm w
+.It Cm -w
 Print
 .Ar display_id Ns \(cqs width.
-.It Cm h
+.It Cm -h
 Print
 .Ar display_id Ns \(cqs
 height.
-.It Cm x
+.It Cm -x
 Print
 .Ar display_id Ns \(cqs
 .EQ
 x
 .EN
 offset.
-.It Cm y
+.It Cm -y
 Print
 .Ar display_id Ns \(cqs
 .EQ
@@ -49,8 +49,8 @@ acts on the X display specified by the
 .Ev DISPLAY
 variable.
 .Sh EXAMPLES
-.Dl $ dattr whxy LVDS-1
+.Dl $ dattr -whxy LVDS-1
 .Dl 1600 900 1920 0
 .Pp
-.Dl $ dattr wh DP-1
+.Dl $ dattr -wh DP-1
 .Dl 1920 1080
