@@ -16,7 +16,7 @@ xcb_screen_t *scrn;
 void
 usage(char *name)
 {
-    printf("usage: [whxy] %s \n", name);
+    printf("usage: %s [whxy] <display_id> \n", name);
     exit(0);
 }
 
