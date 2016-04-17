@@ -3,7 +3,6 @@
  */
 
 #include <xcb/randr.h>
-
 #include "util.h"
 #include "randr.h"
 

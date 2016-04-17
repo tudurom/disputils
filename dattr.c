@@ -2,11 +2,10 @@
  * ix <arcetera@openmailbox.org
  */
 
+#include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <err.h>
-
 #include "randr.h"
 #include "util.h"
 

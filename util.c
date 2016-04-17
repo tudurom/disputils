@@ -5,7 +5,6 @@
 #include <err.h>
 #include <stdlib.h>
 #include <xcb/xcb.h>
-
 #include "util.h"
 
 void
