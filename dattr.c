@@ -1,4 +1,4 @@
-/* disputils randr.c 04/15/2016 tudurom <xenogenesis@openmailbox.org>
+/* disputils dattr.c 04/15/2016 tudurom <xenogenesis@openmailbox.org>
  * ix <arcetera@openmailbox.org
  */
 
