@@ -9,10 +9,10 @@
 #include "randr.h"
 #include "util.h"
 
-static xcb_connection_t *conn;
-static xcb_screen_t *scrn;
+xcb_connection_t *conn;
+xcb_screen_t *scrn;
 
-static void
+void
 usage(char *name)
 {
     printf("usage: %s \n", name);
