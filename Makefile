@@ -1,4 +1,4 @@
-include config.mk
+include config.mk.openbsd
 
 HDR = arg.h util.h randr.h
 SRC = lsd.c dattr.c pfd.c ppd.c

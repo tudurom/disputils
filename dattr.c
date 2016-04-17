@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "arg.h"
 #include "randr.h"
 #include "util.h"
 
@@ -66,24 +67,23 @@ main(int argc, char *argv[])
         errx(1, "Output not in use");
 
     /* print info */
-    for (int i = 0; i < strlen(argv[1]); i++) {
-        switch (argv[1][i]) {
-            case 'w':
-                printf("%d", screen_crtc_info->width);
-                break;
-            case 'h':
-                printf("%d", screen_crtc_info->height);
-                break;
-            case 'x':
-                printf("%d", screen_crtc_info->x);
-                break;
-            case 'y':
-                printf("%d", screen_crtc_info->y);
-                break;
-        }
-        /* print a space if more attributes come after */
-        putc(i + 1 < strlen(argv[1]) ? ' ' : '\n', stdout);
-    }
+    char *argv0;
+    ARGBEGIN {
+        case 'w':
+            printf("%d \n", screen_crtc_info->width);
+            break;
+        case 'h':
+            printf("%d \n", screen_crtc_info->height);
+            break;
+        case 'x':
+            printf("%d \n", screen_crtc_info->x);
+            break;
+        case 'y':
+            printf("%d \n", screen_crtc_info->y);
+            break;
+    } ARGEND;
+    /* print a space if more attributes come after */
+    /* putc(i + 1 < strlen(argv[1]) ? ' ' : '\n', stdout); */
     free(output_info);
     free(screen_crtc_info);
     kill_xcb(&conn);
