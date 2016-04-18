@@ -56,12 +56,9 @@ const char*
 get_output_name(xcb_connection_t* conn, xcb_randr_output_t output)
 { /* get output's name, like LVDS-1 */
     xcb_randr_get_output_info_reply_t* r;
-    char *name;
 
     r = get_output_info(conn, output);
-    name = xcb_randr_get_output_info_name(r);
-    name[r->name_len] = '\0';
-    return name;
+    return (const char *)xcb_randr_get_output_info_name(r);
 }
 
 int
