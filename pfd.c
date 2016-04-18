@@ -5,6 +5,7 @@
 #include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "randr.h"
 #include "util.h"
 
@@ -21,6 +22,10 @@ usage(char *name)
 int
 main(int argc, char *argv[])
 {
+#ifdef __OpenBSD__
+    if (pledge ("stdio rpath unix", NULL) == -1)
+        err(1, "pledge");
+#endif
     xcb_window_t f_window;
     xcb_get_geometry_reply_t *window_geometry = NULL;
 

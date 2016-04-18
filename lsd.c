@@ -5,6 +5,7 @@
 #include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "randr.h"
 #include "util.h"
 
@@ -30,6 +31,10 @@ print_output(xcb_connection_t* conn, xcb_randr_output_t output)
 int
 main(int argc, char *argv[])
 {
+#ifdef __OpenBSD__
+    if (pledge ("stdio rpath unix", NULL) == -1)
+        err(1, "pledge");
+#endif
     if (argc > 1) usage(argv[0]);
     init_xcb(&conn);
     get_screen(conn, &scrn);

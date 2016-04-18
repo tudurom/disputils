@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "arg.h"
 #include "randr.h"
 #include "util.h"
@@ -16,13 +17,17 @@ xcb_screen_t *scrn;
 void
 usage(char *name)
 {
-    printf("usage: %s [whxy] <display_id> \n", name);
+    printf("usage: %s [-whxy] <display_id> \n", name);
     exit(0);
 }
 
 int
 main(int argc, char *argv[])
 {
+#ifdef __OpenBSD__
+    if (pledge ("stdio rpath unix", NULL) == -1)
+        err(1, "pledge");
+#endif
     xcb_randr_output_t output = -1;
     xcb_randr_get_output_info_reply_t *output_info = NULL;
     xcb_randr_crtc_t screen_crtc;

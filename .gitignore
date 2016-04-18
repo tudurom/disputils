@@ -1,4 +1,5 @@
 *.o
+*.core
 lsd
 pfd
 ppd
