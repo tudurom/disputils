@@ -55,8 +55,12 @@ get_output_info(xcb_connection_t* conn, xcb_randr_output_t output)
 uint8_t* get_output_name(xcb_connection_t* conn, xcb_randr_output_t output)
 { /* get output's name, like LVDS-1 */
     xcb_randr_get_output_info_reply_t* r;
+    uint8_t *name;
+
     r = get_output_info(conn, output);
-    return xcb_randr_get_output_info_name(r);
+    name = xcb_randr_get_output_info_name(r);
+    name[r->name_len] = '\0';
+    return name;
 }
 
 int get_output_connection(xcb_connection_t* conn, xcb_randr_output_t output)
