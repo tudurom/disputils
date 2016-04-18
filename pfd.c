@@ -35,7 +35,7 @@ main(int argc, char *argv[])
     xcb_randr_get_output_info_reply_t *output_info = NULL;
     xcb_randr_get_crtc_info_reply_t *output_crtc_info = NULL;
     xcb_randr_output_t output;
-    uint8_t *output_name = NULL;
+    const char *output_name = NULL;
 
     uint16_t output_w;
     uint16_t output_h;

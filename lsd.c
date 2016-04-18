@@ -23,7 +23,7 @@ void
 print_output(xcb_connection_t* conn, xcb_randr_output_t output)
 {
     if (get_output_connection(conn, output) == 0) {
-        uint8_t* name = get_output_name(conn, output);
+        const char* name = get_output_name(conn, output);
         printf("%s\n", name);
     }
 }
