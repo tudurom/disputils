@@ -87,8 +87,7 @@ main(int argc, char *argv[])
             printf("%d \n", screen_crtc_info->y);
             break;
     } ARGEND;
-    /* print a space if more attributes come after */
-    /* putc(i + 1 < strlen(argv[1]) ? ' ' : '\n', stdout); */
+
     free(output_info);
     free(screen_crtc_info);
     kill_xcb(&conn);
