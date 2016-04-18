@@ -75,6 +75,8 @@ main(int argc, char *argv[])
                     window_y <= output_y + output_h) {
 
                     output_name = get_output_name(conn, output);
+                } else {
+                    errx(1, "invalid x/y");
                 }
             }
 
