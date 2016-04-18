@@ -31,6 +31,9 @@ print_output(xcb_connection_t* conn, xcb_randr_output_t output)
 int
 main(int argc, char *argv[])
 {
+    xcb_randr_get_output_info_reply_t *output_info;
+    xcb_randr_get_crtc_info_reply_t *output_crtc_info;
+
 #ifdef __OpenBSD__
     if (pledge ("stdio rpath unix", NULL) == -1)
         err(1, "pledge");
@@ -48,7 +51,11 @@ main(int argc, char *argv[])
 
         /* Print screens from providers */
         for (int j = 0; j < o_len; ++j) {
-            print_output(conn, os[j]);
+            output_info = get_output_info(conn, os[j]);
+            output_crtc_info = get_output_crtc_info(conn, output_info->crtc);
+            /* Print screen only if in use */
+            if (output_crtc_info != NULL)
+                print_output(conn, os[j]);
         }
     }
     return 0;
