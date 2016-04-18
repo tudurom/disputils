@@ -27,12 +27,10 @@ main(int argc, char *argv[])
         err(1, "pledge");
 #endif
     xcb_randr_get_output_primary_reply_t *primary_output;
-    xcb_window_t root;
 
     if (argc > 1) usage(argv[0]);
     init_xcb(&conn);
     get_screen(conn, &scrn);
-    root = scrn->root;
 
     primary_output = get_primary_output(conn);
 

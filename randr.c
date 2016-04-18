@@ -75,8 +75,6 @@ get_output_crtc_info(xcb_connection_t* conn, xcb_randr_crtc_t crtc)
 
     xcb_randr_get_crtc_info_reply_t *crtc_info_reply;
     crtc_info_reply = xcb_randr_get_crtc_info_reply(conn, cic, NULL);
-    if (!crtc_info_reply)
-        errx(1, "Output not in use");
 
     return crtc_info_reply;
 }

@@ -68,20 +68,19 @@ main(int argc, char *argv[])
                 /* Check */
                 output_info = get_output_info(conn, output);
                 output_crtc_info = get_output_crtc_info(conn, output_info->crtc);
+                if (output_crtc_info != NULL) {
+                    output_w = output_crtc_info->width;
+                    output_h = output_crtc_info->height;
+                    output_x = output_crtc_info->x;
+                    output_y = output_crtc_info->y;
 
-                output_w = output_crtc_info->width;
-                output_h = output_crtc_info->height;
-                output_x = output_crtc_info->x;
-                output_y = output_crtc_info->y;
+                    if (window_x >= output_x &&
+                        window_y >= output_y &&
+                        window_x <= output_x + output_w &&
+                        window_y <= output_y + output_h) {
 
-                if (window_x >= output_x &&
-                    window_y >= output_y &&
-                    window_x <= output_x + output_w &&
-                    window_y <= output_y + output_h) {
-
-                    output_name = get_output_name(conn, output);
-                } else {
-                    errx(1, "invalid x/y");
+                        output_name = get_output_name(conn, output);
+                    }
                 }
             }
 
@@ -90,6 +89,8 @@ main(int argc, char *argv[])
 
         i++;
     }
+    if (!output_name)
+        errx(1, "Cannot get output name");
     printf("%s\n", output_name);
     free(window_geometry);
     free(output_info);
