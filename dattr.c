@@ -75,16 +75,16 @@ main(int argc, char *argv[])
     char *argv0;
     ARGBEGIN {
         case 'w':
-            printf("%d \n", screen_crtc_info->width);
+            printf("%d\n", screen_crtc_info->width);
             break;
         case 'h':
-            printf("%d \n", screen_crtc_info->height);
+            printf("%d\n", screen_crtc_info->height);
             break;
         case 'x':
-            printf("%d \n", screen_crtc_info->x);
+            printf("%d\n", screen_crtc_info->x);
             break;
         case 'y':
-            printf("%d \n", screen_crtc_info->y);
+            printf("%d\n", screen_crtc_info->y);
             break;
     } ARGEND;
 
