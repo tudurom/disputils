@@ -86,6 +86,8 @@ main(int argc, char *argv[])
         case 'y':
             printf("%d\n", screen_crtc_info->y);
             break;
+        default:
+            usage(argv0);
     } ARGEND;
 
     free(output_info);
