@@ -20,11 +20,17 @@ usage(char *name)
 }
 
 void
-print_output(xcb_connection_t* conn, xcb_randr_output_t output)
+print_output(xcb_connection_t* conn, xcb_randr_output_t output, xcb_randr_get_output_info_reply_t* output_info)
 {
     if (get_output_connection(conn, output) == 0) {
-        const char* name = get_output_name(conn, output);
-        printf("%s\n", name);
+        const unsigned char *name = xcb_randr_get_output_info_name(output_info);
+        /* FIXME: neat hack for fixing the 'weird characters bug' */
+        while ((*name >= 'a' && *name <= 'z') || (*name >= 'A' && *name <= 'Z') ||
+                (*name >= '0' && *name <= '9') ||
+               *name == '-' || *name == '_') {
+            fputc(*name, stdout);
+            name++;
+        }
     }
 }
 
@@ -54,8 +60,11 @@ main(int argc, char *argv[])
             output_info = get_output_info(conn, os[j]);
             output_crtc_info = get_output_crtc_info(conn, output_info->crtc);
             /* Print screen only if in use */
-            if (output_crtc_info != NULL)
-                print_output(conn, os[j]);
+            if (output_crtc_info != NULL) {
+                print_output(conn, os[j], output_info);
+                if (j < o_len - 1)
+                    fputc('\n', stdout);
+            }
         }
     }
     return 0;
