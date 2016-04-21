@@ -2,7 +2,11 @@
  * ix <arcetera@openmailbox.org
  */
 
+#include <string.h>
+#include <stdio.h>
+
 #include <xcb/randr.h>
+
 #include "util.h"
 #include "randr.h"
 
@@ -58,7 +62,18 @@ get_output_name(xcb_connection_t* conn, xcb_randr_output_t output)
     xcb_randr_get_output_info_reply_t* r;
 
     r = get_output_info(conn, output);
-    return (const char *)xcb_randr_get_output_info_name(r);
+    const char *name = (char *)xcb_randr_get_output_info_name(r);
+    char *ret = malloc(sizeof(unsigned char) * strlen(name));
+    /* FIXME: neat hack for fixing the 'weird characters bug' */
+    int i = 0;
+    while ((*name >= 'a' && *name <= 'z') || (*name >= 'A' && *name <= 'Z') ||
+            (*name >= '0' && *name <= '9') ||
+           *name == '-' || *name == '_') {
+        ret[i] = *name;
+        i++;
+        name++;
+    }
+    return ret;
 }
 
 int

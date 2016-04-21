@@ -23,14 +23,7 @@ void
 print_output(xcb_connection_t* conn, xcb_randr_output_t output, xcb_randr_get_output_info_reply_t* output_info)
 {
     if (get_output_connection(conn, output) == 0) {
-        const unsigned char *name = xcb_randr_get_output_info_name(output_info);
-        /* FIXME: neat hack for fixing the 'weird characters bug' */
-        while ((*name >= 'a' && *name <= 'z') || (*name >= 'A' && *name <= 'Z') ||
-                (*name >= '0' && *name <= '9') ||
-               *name == '-' || *name == '_') {
-            fputc(*name, stdout);
-            name++;
-        }
+        printf("%s", get_output_name(conn, output));
     }
 }
 
