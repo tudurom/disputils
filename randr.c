@@ -63,7 +63,8 @@ get_output_name(xcb_connection_t* conn, xcb_randr_output_t output)
 
     r = get_output_info(conn, output);
     const char *name = (char *)xcb_randr_get_output_info_name(r);
-    char *ret = malloc(sizeof(unsigned char) * strlen(name));
+    char *ret = malloc(sizeof(char) * strlen(name));
+
     /* FIXME: neat hack for fixing the 'weird characters bug' */
     int i = 0;
     while ((*name >= 'a' && *name <= 'z') || (*name >= 'A' && *name <= 'Z') ||
