@@ -4,13 +4,16 @@ disputils
 disputils is a set of utilities to manage multiple monitors with any window
 manager that works with wmutils.
 
-Here's a simple example.
+Download
+--------
 
-The following script puts the current focused window in the middle of the
-current monitor rather than at the center of the root window.
+https://arcetera.moe/dl/rel/disputils-1.0.tar.gz
 
 Example
 -------
+
+The following script puts the current focused window in the middle of the
+current monitor rather than at the center of the root window.
 
 #!/bin/sh
 
