@@ -1,39 +1,42 @@
-/* disputils ppd.c 04/17/2016 tudurom <xenogenesis@openmailbox.org>
- * ix <arcetera@openmailbox.org
+/*
+ * disputils ppd.c 04/17/2016 tudurom <xenogenesis@openmailbox.org> ix
+ * <arcetera@openmailbox.org
  */
 
 #include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
 #include "randr.h"
 #include "util.h"
 
 xcb_connection_t *conn;
-xcb_screen_t *scrn;
+xcb_screen_t   *scrn;
 
 void
 usage(char *name)
 {
-    printf("usage: %s \n", name);
-    exit(0);
+	printf("usage: %s \n", name);
+	exit(0);
 }
 
 int
 main(int argc, char *argv[])
 {
 #ifdef __OpenBSD__
-    if (pledge ("stdio rpath unix", NULL) == -1)
-        err(1, "pledge");
+	if (pledge("stdio rpath unix", NULL) == -1)
+		err(1, "pledge");
 #endif
-    xcb_randr_get_output_primary_reply_t *primary_output;
+	xcb_randr_get_output_primary_reply_t *primary_output;
 
-    if (argc > 1) usage(argv[0]);
-    init_xcb(&conn);
-    get_screen(conn, &scrn);
+	if (argc > 1)
+		usage(argv[0]);
+	init_xcb(&conn);
+	get_screen(conn, &scrn);
 
-    primary_output = get_primary_output(conn);
+	primary_output = get_primary_output(conn);
 
-    printf("%s\n", get_output_name(conn, primary_output->output));
-    return 0;
+	printf("%s\n", get_output_name(conn, primary_output->output));
+	return 0;
 }
