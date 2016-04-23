@@ -90,7 +90,7 @@ main(int argc, char *argv[])
 			printf("%d\n", screen_crtc_info->y);
 			break;
 		default:
-			usage(ch);
+			usage(argv[0]);
 		}
 	}
 
