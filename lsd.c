@@ -56,7 +56,8 @@ main(int argc, char *argv[])
 			output_crtc_info = get_output_crtc_info(conn, output_info->crtc);
 			/* Print screen only if in use */
 			if (output_crtc_info != NULL) {
-				print_output(conn, os[j], output_info);
+                print_output(conn, os[j], output_info);
+				//print_output(conn, os[j], output_info);
 				if (j < o_len - 1)
 					fputc('\n', stdout);
 			}

@@ -57,24 +57,18 @@ get_output_info(xcb_connection_t * conn, xcb_randr_output_t output)
 	return output_info_reply;
 }
 
-const char     *
+uint8_t        *
 get_output_name(xcb_connection_t * conn, xcb_randr_output_t output)
 {				/* get output's name, like LVDS-1 */
 	xcb_randr_get_output_info_reply_t *r;
 
 	r = get_output_info(conn, output);
-	const char     *name = (char *) xcb_randr_get_output_info_name(r);
-	char           *ret = malloc(sizeof(char) * strlen(name));
-
-	/* FIXME: neat hack for fixing the 'weird characters bug' */
-	int 		i = 0;
-	while ((*name >= 'a' && *name <= 'z') || (*name >= 'A' && *name <= 'Z') ||
-	       (*name >= '0' && *name <= '9') ||
-	       *name == '-' || *name == '_') {
-		ret[i] = *name;
-		i++;
-		name++;
-	}
+	uint8_t *name = xcb_randr_get_output_info_name(r);
+    uint8_t *ret  = malloc(sizeof(uint8_t) * xcb_randr_get_output_info_name_length(r));
+    int i;
+    for (i = 0; i < xcb_randr_get_output_info_name_length(r); i++) {
+        ret[i] = name[i];
+    }
 	return ret;
 }
 

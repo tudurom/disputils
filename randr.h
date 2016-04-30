@@ -21,7 +21,7 @@ int 		get_providers(xcb_connection_t * con, xcb_screen_t * scrn, xcb_randr_provi
 xcb_randr_get_output_info_reply_t *get_output_info(xcb_connection_t * conn, xcb_randr_output_t output);
 
 /* Return an output's name */
-const char     *get_output_name(xcb_connection_t * conn, xcb_randr_output_t output);
+uint8_t    *get_output_name(xcb_connection_t * conn, xcb_randr_output_t output);
 
 int 		get_output_connection(xcb_connection_t * conn, xcb_randr_output_t output);
 

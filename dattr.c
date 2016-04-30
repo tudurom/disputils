@@ -53,7 +53,7 @@ main(int argc, char *argv[])
 
 		int 		j = 0;
 		while (j < o_len && output == -1) {
-			if (strcmp(output_name, get_output_name(conn, os[j])) == 0)
+			if (strcmp(output_name, (const char *)get_output_name(conn, os[j])) == 0)
 				output = os[j];
 
 			j++;

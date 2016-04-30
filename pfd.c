@@ -82,7 +82,7 @@ main(int argc, char *argv[])
 					  window_x <= output_x + output_w &&
 					  window_y <= output_y + output_h) {
 
-						output_name = get_output_name(conn, output);
+						output_name = (const char *)get_output_name(conn, output);
 					}
 				}
 			}
