@@ -1,7 +1,4 @@
-/*
- * disputils util.h 04/15/2016 tudurom <xenogenesis@openmailbox.org> ix
- * <arcetera@openmailbox.org
- */
+/* See LICENSE file for copyright and license details. */
 
 #ifndef UTIL_H__
 #define UTIL_H__

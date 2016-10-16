@@ -1,7 +1,4 @@
-/*
- * disputils dattr.c 04/15/2016 tudurom <xenogenesis@openmailbox.org> ix
- * <arcetera@openmailbox.org
- */
+/* See LICENSE file for copyright and license details. */
 
 #include <err.h>
 #include <stdio.h>
