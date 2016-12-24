@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <getopt.h>
 
 #include "randr.h"
 #include "util.h"
@@ -33,9 +32,12 @@ main(int argc, char *argv[])
 	xcb_randr_get_crtc_info_reply_t *screen_crtc_info = NULL;
 	char *output_name;
 
-	if (argc != 3)
+	if (argc == 2)
+		output_name = argv[1];
+	else if (argc == 3)
+		output_name = argv[2];
+	else
 		usage(argv[0]);
-	output_name = argv[2];
 
 	init_xcb(&conn);
 	get_screen(conn, &scrn);
@@ -72,24 +74,25 @@ main(int argc, char *argv[])
 	if (screen_crtc_info == '\0')
 		errx(1, "Output not in use");
 
-	/* print info */
-	int ch;
-	while ((ch = getopt(argc, argv, "whxy:")) != -1) {
-		switch (ch) {
-		case 'w':
-			printf("%d\n", screen_crtc_info->width);
-			break;
-		case 'h':
-			printf("%d\n", screen_crtc_info->height);
-			break;
-		case 'x':
-			printf("%d\n", screen_crtc_info->x);
-			break;
-		case 'y':
-			printf("%d\n", screen_crtc_info->y);
-			break;
-		default:
-			usage(argv[0]);
+	if (argc == 3) {
+		/* print info */
+		for (i = 0; i < strlen(argv[1]); i++) {
+			switch (argv[1][i]) {
+			case 'w':
+				printf("%d\n", screen_crtc_info->width);
+				break;
+			case 'h':
+				printf("%d\n", screen_crtc_info->height);
+				break;
+			case 'x':
+				printf("%d\n", screen_crtc_info->x);
+				break;
+			case 'y':
+				printf("%d\n", screen_crtc_info->y);
+				break;
+			default:
+				usage(argv[0]);
+			}
 		}
 	}
 

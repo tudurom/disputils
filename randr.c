@@ -7,10 +7,6 @@
 #include "util.h"
 #include "randr.h"
 
-/*
- * Get all providers.
- */
-
 int
 get_providers(xcb_connection_t * conn, xcb_screen_t * scrn, xcb_randr_provider_t ** ps)
 {
@@ -27,10 +23,6 @@ get_providers(xcb_connection_t * conn, xcb_screen_t * scrn, xcb_randr_provider_t
 	return xcb_randr_get_providers_providers_length(pr);
 }
 
-/*
- * Get array of outputs
- */
-
 int
 get_outputs(xcb_connection_t * conn, xcb_randr_provider_t provider, xcb_randr_output_t ** os)
 {
@@ -45,10 +37,6 @@ get_outputs(xcb_connection_t * conn, xcb_randr_provider_t provider, xcb_randr_ou
 	*os = xcb_randr_get_provider_info_outputs(pir);
 	return xcb_randr_get_provider_info_outputs_length(pir);
 }
-
-/*
- * Get info about the output like crtc, modes etc.
- */
 
 xcb_randr_get_output_info_reply_t *
 get_output_info(xcb_connection_t * conn, xcb_randr_output_t output)
@@ -65,10 +53,6 @@ get_output_info(xcb_connection_t * conn, xcb_randr_output_t output)
 	return output_info_reply;
 }
 
-/*
- * Get output's name, like LVDS-1.
- */
-
 uint8_t*
 get_output_name(xcb_connection_t * conn, xcb_randr_output_t output)
 {
@@ -84,10 +68,6 @@ get_output_name(xcb_connection_t * conn, xcb_randr_output_t output)
 	return ret;
 }
 
-/*
- * Returns 0 if the output is connected.
- */
-
 int
 get_output_connection(xcb_connection_t * conn, xcb_randr_output_t output)
 {
@@ -95,10 +75,6 @@ get_output_connection(xcb_connection_t * conn, xcb_randr_output_t output)
 	r = get_output_info(conn, output);
 	return r->connection;
 }
-
-/*
- * Get crtc info (width, height, x, y, ...).
- */
 
 xcb_randr_get_crtc_info_reply_t *
 get_output_crtc_info(xcb_connection_t * conn, xcb_randr_crtc_t crtc)
@@ -112,10 +88,6 @@ get_output_crtc_info(xcb_connection_t * conn, xcb_randr_crtc_t crtc)
 
 	return crtc_info_reply;
 }
-
-/*
- * Returns the id of the focused window.
- */
 
 xcb_window_t
 get_focused_window(xcb_connection_t * conn)
@@ -133,10 +105,6 @@ get_focused_window(xcb_connection_t * conn)
 	return win;
 }
 
-/*
- * Returns the geometry of a window (width, height, x, y).
- */
-
 xcb_get_geometry_reply_t *
 get_window_geometry(xcb_connection_t * conn, xcb_window_t window)
 {
@@ -150,10 +118,6 @@ get_window_geometry(xcb_connection_t * conn, xcb_window_t window)
 		errx(1, "0x%08x: no such window", window);
 	return get_geometry_reply;
 }
-
-/*
- * Returns the primary output (display).
- */
 
 xcb_randr_get_output_primary_reply_t *
 get_primary_output(xcb_connection_t * conn)

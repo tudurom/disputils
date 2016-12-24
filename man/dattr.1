@@ -19,7 +19,11 @@ to
 What information is presented depends on the commands given to
 .Nm .
 The queried arguments are printed in the order they are requested,
-spearated by a space.
+spearated by a space. If no commands are given,
+.Nm
+will return 0 if
+.Ar display_id
+exists, and 1 otherwise.
 .Bl -tag -display_idth Ds
 .It Cm -w
 Print
