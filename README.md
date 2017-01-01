@@ -1,8 +1,8 @@
 disputils
 =========
 
-disputils is a set of utilities to manage multiple monitors with any window
-manager that works with wmutils.
+disputils is a set of utilities to query information about connected X
+displays.
 
 Download
 --------
@@ -15,6 +15,7 @@ Example
 The following script puts the current focused window in the middle of the
 current monitor rather than at the center of the root window.
 
+```bash
 #!/bin/sh
 
 # get display, wid, w/h, border width
@@ -32,9 +33,11 @@ SY=$(dattr -y $MON)
 
 # move the window to the center
 wtp $((SW/2 + SX - WW/2 - BW)) $((SH/2 - SY - WH/2 - BW)) $WW $WH $WID
+```
 
 Dependencies
 ------------
 
 * xcb
 * xcb_randr
+

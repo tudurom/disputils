@@ -1,7 +1,7 @@
 include config.mk
 
 HDR = util.h randr.h
-SRC = lsd.c dattr.c pfd.c ppd.c
+SRC = lsd.c dattr.c pfd.c ppd.c phd.c
 
 OBJ = $(SRC:.c=.o)
 BIN = $(SRC:.c=)

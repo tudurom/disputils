@@ -1,9 +1,10 @@
 include ../config.mk
 
-MAN =           \
+MAN =       \
 	lsd.1   \
 	pfd.1   \
 	ppd.1   \
+	phd.1   \
 	dattr.1 \
 
 .POSIX:
