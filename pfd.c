@@ -1,10 +1,12 @@
 /* See LICENSE file for copyright and license details. */
 
 #include <err.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "arg.h"
 #include "randr.h"
 #include "util.h"
 
@@ -14,8 +16,17 @@ xcb_screen_t     *scrn;
 void
 usage(char *name)
 {
-	printf("usage: %s \n", name);
+	printf("usage: %s [-w wid]\n", name);
 	exit(0);
+}
+
+bool
+window_exists(xcb_window_t win) {
+	xcb_get_geometry_reply_t *r =
+		xcb_get_geometry_reply(conn,
+				xcb_get_geometry(conn, win), NULL);
+
+	return r != NULL;
 }
 
 int
@@ -41,13 +52,20 @@ main(int argc, char *argv[])
 	uint16_t output_x;
 	uint16_t output_y;
 
-	if (argc > 1)
-		usage(argv[0]);
+	char *argv0;
+
 	init_xcb(&conn);
 	get_screen(conn, &scrn);
 
-	/* Get info about the focused window */
 	f_window = get_focused_window(conn);
+	/* Get info about the focused window */
+	ARGBEGIN {
+		case 'w':
+			f_window = strtoul(EARGF(usage(argv0)), NULL, 16);
+	} ARGEND
+
+	if (!window_exists(f_window))
+		errx(1, "Window does not exist");
 	window_geometry = get_window_geometry(conn, f_window);
 	window_x = window_geometry->x;
 	window_y = window_geometry->y;

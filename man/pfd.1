@@ -6,8 +6,13 @@
 .Nd print monitor containing the focused window
 .Sh SYNOPSIS
 .Nm pfd
+.Op Fl w Ar wid
 .Sh DESCRIPTION
-Print the ID of the monitor containing the currently focused window to
+Print the ID of the monitor containing
+.Ar wid
+or the currently focused window (if
+.Ar wid
+is not specified) to
 .Dv stdout .
 .Sh ENVIRONMENT
 .Nm
