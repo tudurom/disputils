@@ -60,11 +60,14 @@ get_output_name(xcb_connection_t * conn, xcb_randr_output_t output)
 
 	r = get_output_info(conn, output);
 	uint8_t *name = xcb_randr_get_output_info_name(r);
-	uint8_t *ret  = malloc(sizeof(uint8_t) * xcb_randr_get_output_info_name_length(r));
+	int len = xcb_randr_get_output_info_name_length(r);
+	uint8_t *ret  =
+		malloc(sizeof(uint8_t) * len + 1);
 	int i;
 	for (i = 0; i < xcb_randr_get_output_info_name_length(r); i++) {
 		ret[i] = name[i];
 	}
+	ret[len] = '\0';
 	return ret;
 }
 
