@@ -33,7 +33,7 @@ main(int argc, char *argv[])
 	xcb_randr_get_output_info_reply_t *output_info = NULL;
 	xcb_randr_get_crtc_info_reply_t *output_crtc_info = NULL;
 	xcb_randr_output_t output;
-	const char *output_name = NULL;
+	const char *output_name;
 
 	uint16_t output_w;
 	uint16_t output_h;
@@ -56,12 +56,13 @@ main(int argc, char *argv[])
 	int p_len = get_providers(conn, scrn, &providers);
 
 	int i = 0;
-	while (i < p_len && output_name == '\0') {
+	output_name = NULL;
+	while (i < p_len && output_name == NULL) {
 		xcb_randr_output_t *os;
 		int o_len = get_outputs(conn, providers[i], &os);
 
 		int j = 0;
-		while (j < o_len && output_name == '\0') {
+		while (j < o_len && output_name == NULL) {
 			output = os[j];
 			if (get_output_connection(conn, output) == 0) {
 				/* Check */
@@ -87,7 +88,7 @@ main(int argc, char *argv[])
 
 		i++;
 	}
-	if (output_name == '\0')
+	if (output_name == NULL)
 		errx(1, "Cannot get output name");
 	printf("%s\n", output_name);
 	free(pointer);
