@@ -6,7 +6,18 @@
 .Nd list connected displays
 .Sh SYNOPSIS
 .Nm
+.Op Fl a
+.Sh DESCRIPTION
+.Nm
 lists connected displays.
+.Pp
+By default,
+.Nm
+lists only displays that are in use.
+.Bl -tag -width Ds
+.It Fl a
+List all connected displays, not only those who are in use.
+.El
 .Sh ENVIRONMENT
 .Nm
 acts on the X display specified by the
