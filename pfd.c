@@ -95,8 +95,8 @@ main(int argc, char *argv[])
 
 					if (window_x >= output_x &&
 						window_y >= output_y &&
-					  window_x <= output_x + output_w &&
-					  window_y <= output_y + output_h) {
+					  window_x < output_x + output_w &&
+					  window_y < output_y + output_h) {
 
 						output_name = (const char *)get_output_name(conn, output);
 					}
